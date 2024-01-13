@@ -2,15 +2,6 @@
 
 defined('TYPO3_MODE') || defined('TYPO3') || die('Access denied.');
 
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
-use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
-
-// Get extension configuration
-$extensionConfiguration = GeneralUtility::makeInstance(ExtensionConfiguration::class);
-$extensionConfiguration = $extensionConfiguration->get('imagelazyload');
-
-
 $tempColumns = array(
     'tx_imagelazyload' => [
         'exclude' => 1,
@@ -29,7 +20,11 @@ $tempColumns = array(
     ],
 );
 
-ExtensionManagementUtility::addTCAcolumns('tt_content', $tempColumns);
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('tt_content', $tempColumns);
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('tt_content',
+    'tx_imagelazyload',
+'image,textpic,textmedia',
+'after:image_zoom');
 
 $GLOBALS['TCA']['tt_content']['palettes']['imagelazyload']['showitem'] = '
 	tx_imagelazyload,
