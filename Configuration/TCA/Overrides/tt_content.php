@@ -25,6 +25,9 @@ $tempColumns = array(
                     'invertStateDisplay' => true
                 ]
             ],
+            'behaviour' => [
+                'allowLanguageSynchronization' => true
+            ]
         ]
     ],
 );
